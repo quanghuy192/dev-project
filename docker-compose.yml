@@ -1,0 +1,14 @@
+version: '2.2'
+
+services:
+  mysql:
+    container_name: mydb-mysql
+    image: mysql:5.7
+    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+    volumes:
+      - ./docker/mysql/init-table.sql:/docker-entrypoint-initdb.d/init-table.sql
+    environment:
+      MYSQL_DATABASE: mydb
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - 3456:3306
