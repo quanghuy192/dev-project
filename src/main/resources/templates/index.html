@@ -6,16 +6,22 @@
 </head>
 <body>
 <span>
-    <b style="font-size: xxx-large">Funny Movies</b>
-    <button style="margin-left: 150px">Button</button>
-    <button style="margin-left: 19px">Shared a movie</button>
-    <button style="margin-left: 19px">Login/Register</button>
+    <form action="/register" method="post">
+        <b style="font-size: xxx-large">Funny Movies</b>
+        <input style="margin-left: 150px" placeholder="Email"/>
+        <input style="margin-left: 19px" placeholder="Password"/>
+        <button style="margin-left: 19px">Login/Register</button>
+    </form>
 </span>
 <br>
 <hr>
-<table>
-
-</table>
+<ul>
+    <li th:each="movie : ${movies}">
+        <span th:text="*{movie.title}"></span>
+        <span th:text="*{movie.sharedBy}"></span>
+        <span th:text="*{movie.content}"></span>
+    </li>
+</ul>
 <br>
 </body>
 </html>
