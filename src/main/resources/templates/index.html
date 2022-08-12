@@ -6,11 +6,11 @@
 </head>
 <body>
 <span>
-    <form action="/register" method="post">
+    <form th:action="@{/register}" th:object="${user}" method="post">
         <b style="font-size: xxx-large">Funny Movies</b>
-        <input style="margin-left: 150px" placeholder="Email"/>
-        <input style="margin-left: 19px" placeholder="Password"/>
-        <button style="margin-left: 19px">Login/Register</button>
+        <input style="margin-left: 150px" placeholder="Email" th:field="*{username}"/>
+        <input type="password" style="margin-left: 19px" placeholder="Password" th:field="*{password}"/>
+        <input type="submit" value="Login/Register" style="margin-left: 19px"/>
     </form>
 </span>
 <br>

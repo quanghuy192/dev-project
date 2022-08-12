@@ -16,11 +16,7 @@ public class UserService {
 
     @SneakyThrows
     public User findBy(String username){
-        User user = userRepository.findUserByUsername(username);
-        if(user == null){
-            throw new Exception("User not found");
-        }
-        return user;
+        return userRepository.findUserByUsername(username);
     }
 
     public List<User> findAll(){
