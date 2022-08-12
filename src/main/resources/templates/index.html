@@ -15,11 +15,14 @@
 </span>
 <br>
 <hr>
-<ul>
+<br>
+<ul style="margin-left: 70px">
     <li th:each="movie : ${movies}">
-        <span th:text="*{movie.title}"></span>
-        <span th:text="*{movie.sharedBy}"></span>
-        <span th:text="*{movie.content}"></span>
+        <p><span th:text="*{movie.title}"></span></p>
+        <p><span th:text="*{movie.sharedBy}"></span></p>
+        <p><span th:text="*{movie.content}"></span></p>
+        <br>
+        <br>
     </li>
 </ul>
 <br>

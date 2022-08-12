@@ -47,7 +47,10 @@ public class WebController {
         if (bindingResult.hasErrors()) {
             //errors processing
         }
+
+        final List<Movie> movies = movieService.findAll();
         model.addAttribute("user", user);
+        model.addAttribute("movies", movies);
 
         // user exist
         if (userService.findBy(user.getUsername()) != null) {

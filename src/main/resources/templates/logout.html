@@ -8,19 +8,22 @@
 <span>
     <form th:action="@{/shared}" method="post">
         <b style="font-size: xxx-large">Funny Movies</b>
-        <input style="margin-left: 150px" type="submit" value="Shared a movie"/>
+        <span style="margin-left: 50px"></span>
+        Welcome <label style="margin-left: 10px" th:text="*{user.username}"/>
+        <input style="margin-left: 15px" type="submit" value="Shared a movie"/>
         <button style="margin-left: 19px">Logout</button>
     </form>
 </span>
 <br>
 <hr>
 <br>
-<br>
-<ul>
+<ul style="margin-left: 70px">
     <li th:each="movie : ${movies}">
-        <span th:text="*{movie.title}"></span>
-        <span th:text="*{movie.sharedBy}"></span>
-        <span th:text="*{movie.content}"></span>
+        <p><span th:text="*{movie.title}"></span></p>
+        <p><span th:text="*{movie.sharedBy}"></span></p>
+        <p><span th:text="*{movie.content}"></span></p>
+        <br>
+        <br>
     </li>
 </ul>
 <br>
