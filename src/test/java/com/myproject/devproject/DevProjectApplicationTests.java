@@ -88,4 +88,16 @@ class DevProjectApplicationTests {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void givenUser_whenUserEmpty_thenStatus400()
+            throws Exception {
+
+        userRepository.deleteAll();
+        movieRepository.deleteAll();
+
+        mvc.perform(get("/users")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError());
+    }
 }

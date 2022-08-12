@@ -5,6 +5,8 @@ import com.myproject.devproject.models.User;
 import com.myproject.devproject.services.MovieService;
 import com.myproject.devproject.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -57,9 +59,13 @@ public class WebController {
     }
 
     @GetMapping("/users")
-    public String getUsers() {
-        userService.findAll();
-        return "logout";
+    public ResponseEntity<HttpStatus> getUsers() {
+        try {
+            userService.findAll();
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/user/{username}")

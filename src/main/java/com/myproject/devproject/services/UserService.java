@@ -20,8 +20,7 @@ public class UserService {
         return userRepository.findUserByUsername(username);
     }
 
-    @SneakyThrows
-    public List<User> findAll(){
+    public List<User> findAll() throws Exception {
         final List<User> users = userRepository.findAll();
         if(CollectionUtils.isEmpty(users)){
             throw new Exception("User empty");
