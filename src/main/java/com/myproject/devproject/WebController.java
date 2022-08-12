@@ -48,7 +48,7 @@ public class WebController {
         model.addAttribute("user", user);
 
         // user exist
-        if(userService.findBy(user.getUsername()) != null){
+        if (userService.findBy(user.getUsername()) != null) {
             return "logout";
         }
 
@@ -59,7 +59,7 @@ public class WebController {
     @GetMapping("/users")
     public String getUsers() {
         userService.findAll();
-        return "index";
+        return "logout";
     }
 
     @PostMapping("/user/{username}")

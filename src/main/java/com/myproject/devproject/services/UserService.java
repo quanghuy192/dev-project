@@ -5,6 +5,7 @@ import com.myproject.devproject.repositories.UserRepository;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -19,8 +20,13 @@ public class UserService {
         return userRepository.findUserByUsername(username);
     }
 
+    @SneakyThrows
     public List<User> findAll(){
-        return userRepository.findAll();
+        final List<User> users = userRepository.findAll();
+        if(CollectionUtils.isEmpty(users)){
+            throw new Exception("User empty");
+        }
+        return users;
     }
 
     public User resolveUser(User user){
