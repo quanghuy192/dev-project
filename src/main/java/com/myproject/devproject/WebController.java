@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
 public class WebController {
@@ -28,13 +30,16 @@ public class WebController {
     @Autowired
     MovieService movieService;
 
-    @RequestMapping(value = "/shared", method = RequestMethod.POST)
-    public String shared(@ModelAttribute User user, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            //errors processing
-        }
+    private final ConcurrentHashMap<String, Object> cacheMap = new ConcurrentHashMap<>();
 
-        model.addAttribute("user", user);
+    @RequestMapping(value = "/shared", method = RequestMethod.POST)
+    public String shared(Model model) {
+        if (cacheMap.containsKey("user")) {
+            User user = (User) cacheMap.get("user");
+            if (Objects.nonNull(user)) {
+                model.addAttribute("user", user);
+            }
+        }
         return "shared";
     }
 
@@ -59,10 +64,12 @@ public class WebController {
 
         // user exist
         if (userService.findBy(user.getUsername()) != null) {
+            cacheMap.putIfAbsent("user", user);
             return "logout";
         }
 
         userService.resolveUser(user);
+        cacheMap.putIfAbsent("user", user);
         return "logout";
     }
 

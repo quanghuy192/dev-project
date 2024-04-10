@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <form th:action="@{/shared}" th:object="${user}" method="post" style="display: inline">
+    <form th:action="@{/shared}" method="post" style="display: inline">
         <img src="../static/images/home.png" width="80" th:src="@{images/home.png}" style="object-fit: contain"/>
         <b style="font-size: xxx-large; margin-right: 70px">Funny Movies</b>
         Welcome <label style="margin-left: 10px" th:text="*{user.username}"/>
