@@ -2,6 +2,7 @@ version: '2.2'
 
 services:
   mysql:
+    platform: linux/x86_64
     container_name: mydb-mysql
     image: mysql:5.7
     command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"

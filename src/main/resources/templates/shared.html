@@ -5,12 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-<span>
-    <form>
-        <b style="font-size: xxx-large">Funny Movies</b>
+<div>
+    <form th:action="@{/shared}" method="post" style="display: inline">
+        <img src="../static/images/home.png" width="80" th:src="@{images/home.png}" style="object-fit: contain"/>
+        <b style="font-size: xxx-large; margin-right: 70px">Funny Movies</b>
+        Welcome <label style="margin-left: 10px" th:text="*{user.username}"/>
+        <input style="margin-left: 15px" type="submit" value="Shared a movie"/>
         <button style="margin-left: 19px">Logout</button>
     </form>
-</span>
+</div>
 <br>
 <hr>
 <br>

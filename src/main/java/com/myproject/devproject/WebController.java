@@ -28,8 +28,13 @@ public class WebController {
     @Autowired
     MovieService movieService;
 
-    @PostMapping("/shared")
-    public String shared() {
+    @RequestMapping(value = "/shared", method = RequestMethod.POST)
+    public String shared(@ModelAttribute User user, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            //errors processing
+        }
+
+        model.addAttribute("user", user);
         return "shared";
     }
 

@@ -16,11 +16,11 @@ public class MovieService {
     @Autowired
     MovieRepository movieRepository;
 
-    public List<Movie> findAll(){
+    public List<Movie> findAll() {
         return movieRepository.findAll();
     }
 
-    public Movie resolveUser(Movie movie){
+    public Movie resolveUser(Movie movie) {
         return movieRepository.save(movie);
     }
 }

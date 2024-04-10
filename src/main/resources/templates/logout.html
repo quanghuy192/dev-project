@@ -5,28 +5,36 @@
     <title>Title</title>
 </head>
 <body>
-<span>
-    <form th:action="@{/shared}" method="post">
-        <b style="font-size: xxx-large">Funny Movies</b>
-        <span style="margin-left: 50px"></span>
+<div>
+    <form th:action="@{/shared}" th:object="${user}" method="post" style="display: inline">
+        <img src="../static/images/home.png" width="80" th:src="@{images/home.png}" style="object-fit: contain"/>
+        <b style="font-size: xxx-large; margin-right: 70px">Funny Movies</b>
         Welcome <label style="margin-left: 10px" th:text="*{user.username}"/>
         <input style="margin-left: 15px" type="submit" value="Shared a movie"/>
         <button style="margin-left: 19px">Logout</button>
     </form>
-</span>
+</div>
 <br>
 <hr>
 <br>
-<ul style="margin-left: 70px">
+<ul style="margin-left: 150px; list-style-type: none;">
     <li th:each="movie : ${movies}">
-        <p><span th:text="*{movie.title}"></span></p>
-        <p><span th:text="*{movie.sharedBy}"></span></p>
-        <p><span th:text="*{movie.content}"></span></p>
-        <br>
-        <br>
+        <div style="display: inline">
+            <div style="float: left">
+                <img src="../static/images/icon.png" width="250" th:src="@{images/icon.png}"
+                     style="object-fit: contain; margin-right: 50px"/>
+            </div>
+            <div style="width: 550px; margin-left: 100px">
+                <p style="color: red; font-weight: bold; font-size: larger"><span th:text="*{movie.title}"></span></p>
+                <p> Shared by: <span th:text="*{movie.sharedBy}"></span></p>
+                <p> Description: </p>
+                <p style="font-weight: bold; font-size: small"><span th:text="*{movie.content}"></span></p>
+                <br>
+                <br>
+            </div>
+        </div>
     </li>
 </ul>
-<br>
 <br>
 </body>
 </html>
