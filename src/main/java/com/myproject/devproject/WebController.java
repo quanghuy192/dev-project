@@ -23,16 +23,13 @@ import java.util.concurrent.ConcurrentHashMap;
 @Controller
 public class WebController {
 
+    private final ConcurrentHashMap<String, Object> cacheMap = new ConcurrentHashMap<>();
     @Autowired
     UserService userService;
-
     @Autowired
     MovieService movieService;
-
     @Autowired
     SimpMessagingTemplate simpMessagingTemplate;
-
-    private final ConcurrentHashMap<String, Object> cacheMap = new ConcurrentHashMap<>();
 
     @RequestMapping(value = "/shared", method = RequestMethod.POST)
     public String shared(Model model) {
@@ -87,8 +84,12 @@ public class WebController {
 
     @PostMapping("/user/{username}")
     public String login(@PathVariable String username) {
-        userService.findBy(username);
-        return "index";
+        User userExist = userService.findBy(username);
+        if (Objects.nonNull(userExist)) {
+            return "index";
+        } else {
+            return "error";
+        }
     }
 
     @MessageMapping("/subscribe")

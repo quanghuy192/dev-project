@@ -79,5 +79,4 @@ public class UserUseCaseTest {
         assertThat(users.getPassword()).isEqualTo(user1.getPassword());
         verify(userRepository).findUserByUsername(any());
     }
-
 }

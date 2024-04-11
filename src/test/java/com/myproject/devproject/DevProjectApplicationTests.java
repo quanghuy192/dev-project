@@ -15,11 +15,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,12 +32,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestPropertySource(locations = "classpath:application-integrationtest.properties")
 class DevProjectApplicationTests {
 
+    final ObjectMapper mapper = new ObjectMapper();
     @Autowired
     private MockMvc mvc;
-
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private MovieRepository movieRepository;
 
@@ -56,7 +57,34 @@ class DevProjectApplicationTests {
             userRepository.delete(userExist);
         }
 
-        final ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson = ow.writeValueAsString(user);
+
+        mvc.perform(post("/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .flashAttr("user", user)
+                        .content(requestJson))
+                .andExpect(status().isOk());
+
+        final User userSaved = userRepository.findUserByUsername(user.getUsername());
+        assertThat(userSaved).isNotNull();
+    }
+
+    @Test
+    public void givenUser_whenLogin_thenStatus200()
+            throws Exception {
+
+        final User user = new User();
+        user.setUsername("name1");
+        user.setPassword("pass123@");
+
+        final User userExist = userRepository.findUserByUsername(user.getUsername());
+        if (Objects.nonNull(userExist)) {
+            userRepository.delete(userExist);
+        }
+
+        userRepository.save(user); // user exist
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson = ow.writeValueAsString(user);
