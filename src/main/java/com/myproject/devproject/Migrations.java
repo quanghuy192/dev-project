@@ -42,6 +42,18 @@ public class Migrations implements CommandLineRunner {
             user.setPassword(usFaker.internet().password());
             users.add(user);
         }
+
+        // master user
+        final User user1 = new User();
+        user1.setUsername("name1");
+        user1.setPassword("pass123@1");
+
+        final User user2 = new User();
+        user2.setUsername("name2");
+        user2.setPassword("pass123@2");
+
+        users.add(user1);
+        users.add(user2);
         userRepository.saveAll(users);
     }
 

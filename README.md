@@ -37,8 +37,12 @@ III) Installation & Configuration:
     7. Run project (Main in DevProjectApplication.java)
 
 IV) Database Setup: 
-    We do not need seeding fake data, the seed data will be appended new 10 for users and 20 for movies when we run the application,
+    1. We do not need seeding fake data, the seed data will be appended new 10 for users and 20 for movies when we run the application,
 we just ensure above step must success (run docker-compose success, the database created success)
+    2. We have 2 master user, as below:
+        - name1/pass123@1
+        - name2/pass123@2
+    Otherwise, connect DB to see more
 
 V) Running the Application: 
     1. Using Spring Boots with thymeleaf so we just only run Main in DevProjectApplication.java, then we can access the web browser:
