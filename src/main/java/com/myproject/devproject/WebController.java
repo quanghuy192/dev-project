@@ -1,12 +1,16 @@
 package com.myproject.devproject;
 
 import com.myproject.devproject.models.Movie;
+import com.myproject.devproject.models.Notification;
 import com.myproject.devproject.models.User;
 import com.myproject.devproject.services.MovieService;
 import com.myproject.devproject.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +33,9 @@ public class WebController {
 
     @Autowired
     MovieService movieService;
+
+    @Autowired
+    SimpMessagingTemplate simpMessagingTemplate;
 
     private final ConcurrentHashMap<String, Object> cacheMap = new ConcurrentHashMap<>();
 
@@ -87,5 +94,11 @@ public class WebController {
     public String login(@PathVariable String username) {
         userService.findBy(username);
         return "index";
+    }
+
+    @MessageMapping("/subscribe")
+    @SendTo("/all/messages")
+    public Notification send(final Notification notification) {
+        return notification;
     }
 }

@@ -4,12 +4,41 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+<script  th:inline="javascript">
+    let stompClient = null;
+
+    const socket = new SockJS('/ws');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function(frame) {
+        console.log(frame);
+        stompClient.subscribe('/all/messages', function(result) {
+            show(JSON.parse(result.body));
+        });
+    });
+
+    function sendMessage() {
+        const text = document.getElementById('url').value;
+        const usernameTag = document.getElementById('username');
+        const username = (usernameTag.innerText || usernameTag.textContent);
+
+        stompClient.send("/subscribe", {},
+            JSON.stringify({'text':text, 'user':username}));
+    }
+
+    function show(message) {
+        const mess = 'User: ' + message.user + ' has just shared a new video: ' + message.text
+        alert(mess);
+    }
+</script>
+
 <body>
 <div>
     <form th:action="@{/shared}" method="post" style="display: inline">
         <img src="../static/images/home.png" width="80" th:src="@{images/home.png}" style="object-fit: contain"/>
         <b style="font-size: xxx-large; margin-right: 70px">Funny Movies</b>
-        Welcome <label style="margin-left: 10px" th:text="*{user.username}"/>
+        Welcome <label id="username" style="margin-left: 10px" th:text="*{user.username}"/>
         <input style="margin-left: 15px" type="submit" value="Shared a movie"/>
         <button style="margin-left: 19px">Logout</button>
     </form>
@@ -19,14 +48,14 @@
 <br>
 <br>
 <div style="padding: 50px">
-    <form style="text-align: center; width: 500px; border:black; border-width:1px; border-style:solid; padding: 50px 0; margin: 50px auto; margin-left: 500px;">
+    <div style="text-align: center; width: 500px; border:black; border-width:1px; border-style:solid; padding: 50px 0; margin: 50px auto; margin-left: 500px;">
         <h3 style="font-size: large; text-align: right; margin-right: 150px">Shared a Youtube movie</h3>
         <div style="text-align: right;">
-            Youtube url: <input style="margin-left: 15px; margin-right: 150px"/>
+            Youtube url: <input type="url" id="url"  style="margin-left: 15px; margin-right: 150px"/>
             <h3></h3>
-            <input type="submit" value="Shared" style="width: 185px; margin-right: 150px"/>
+            <button id="sendMessage" style="width: 185px; margin-right: 150px" onclick="sendMessage();">Shared</button>
         </div>
-    </form>
+    </div>
 </div>
 <br>
 </body>

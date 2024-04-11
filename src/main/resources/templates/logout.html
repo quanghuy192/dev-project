@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+<script  th:inline="javascript">
+    let stompClient = null;
+
+    const socket = new SockJS('/ws');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function(frame) {
+        console.log(frame);
+        stompClient.subscribe('/all/messages', function(result) {
+            show(JSON.parse(result.body));
+        });
+    });
+
+    function show(message) {
+        const mess = 'User: ' + message.user + ' has just shared a new video: ' + message.text
+        alert(mess);
+    }
+</script>
 <body>
 <div>
     <form th:action="@{/shared}" method="post" style="display: inline">
