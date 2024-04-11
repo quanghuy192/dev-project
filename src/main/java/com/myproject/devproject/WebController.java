@@ -14,12 +14,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -47,7 +42,7 @@ public class WebController {
                 model.addAttribute("user", user);
             }
         }
-        return "shared";
+        return "share";
     }
 
     @GetMapping("/")
@@ -72,12 +67,12 @@ public class WebController {
         // user exist
         if (userService.findBy(user.getUsername()) != null) {
             cacheMap.putIfAbsent("user", user);
-            return "logout";
+            return "register";
         }
 
         userService.resolveUser(user);
         cacheMap.putIfAbsent("user", user);
-        return "logout";
+        return "register";
     }
 
     @GetMapping("/users")

@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -46,12 +47,14 @@ class DevProjectApplicationTests {
     public void givenUser_whenRegister_thenStatus200()
             throws Exception {
 
-        userRepository.deleteAll();
-        movieRepository.deleteAll();
-
         final User user = new User();
         user.setUsername("name1");
         user.setPassword("pass123@");
+
+        final User userExist = userRepository.findUserByUsername(user.getUsername());
+        if (Objects.nonNull(userExist)) {
+            userRepository.delete(userExist);
+        }
 
         final ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
@@ -72,9 +75,6 @@ class DevProjectApplicationTests {
     public void givenUser_whenGetAll_thenStatus200()
             throws Exception {
 
-        userRepository.deleteAll();
-        movieRepository.deleteAll();
-
         final User user1 = new User();
         user1.setUsername("name1");
         user1.setPassword("pass123@1");
@@ -82,6 +82,15 @@ class DevProjectApplicationTests {
         final User user2 = new User();
         user2.setUsername("name2");
         user2.setPassword("pass123@2");
+
+        final User userExist1 = userRepository.findUserByUsername(user1.getUsername());
+        final User userExist2 = userRepository.findUserByUsername(user1.getUsername());
+        if (Objects.nonNull(userExist1)) {
+            userRepository.delete(userExist1);
+        }
+        if (Objects.nonNull(userExist2)) {
+            userRepository.delete(userExist2);
+        }
 
         userRepository.saveAll(Arrays.asList(user1, user2));
         mvc.perform(get("/users")
