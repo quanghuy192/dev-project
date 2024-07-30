@@ -1,7 +1,7 @@
-package com.myproject.devproject.services;
+package com.myproject.devproject.application.usecases;
 
-import com.myproject.devproject.models.Movie;
-import com.myproject.devproject.repositories.MovieRepository;
+import com.myproject.devproject.application.entities.Movie;
+import com.myproject.devproject.datasources.mysql.MovieRepositoryMysql;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MovieService {
+public class MovieUseCase {
 
     @Autowired
-    MovieRepository movieRepository;
+    MovieRepositoryMysql movieRepository;
 
     public List<Movie> findAll() {
         return movieRepository.findAll();

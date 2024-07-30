@@ -1,5 +1,6 @@
-package com.myproject.devproject.models;
+package com.myproject.devproject.application.entities;
 
+import com.myproject.devproject.application.core.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+public class User extends BaseEntity implements Serializable {
     private static final long serialVersionUID = -297553281792804396L;
 
     @Id

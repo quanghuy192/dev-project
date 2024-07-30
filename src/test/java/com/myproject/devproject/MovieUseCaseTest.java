@@ -1,8 +1,8 @@
 package com.myproject.devproject;
 
-import com.myproject.devproject.models.Movie;
-import com.myproject.devproject.repositories.MovieRepository;
-import com.myproject.devproject.services.MovieService;
+import com.myproject.devproject.application.entities.Movie;
+import com.myproject.devproject.datasources.mysql.MovieRepositoryMysql;
+import com.myproject.devproject.application.usecases.MovieUseCase;
 import lombok.SneakyThrows;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,10 +25,10 @@ import static org.mockito.Mockito.when;
 public class MovieUseCaseTest {
 
     @InjectMocks
-    MovieService movieService;
+    MovieUseCase movieService;
 
     @Mock
-    MovieRepository movieRepository;
+    MovieRepositoryMysql movieRepository;
 
     @Test
     public void whenSavedMovie_shouldReturnSavedMovie() {

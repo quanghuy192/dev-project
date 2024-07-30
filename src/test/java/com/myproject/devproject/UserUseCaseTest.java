@@ -1,8 +1,8 @@
 package com.myproject.devproject;
 
-import com.myproject.devproject.models.User;
-import com.myproject.devproject.repositories.UserRepository;
-import com.myproject.devproject.services.UserService;
+import com.myproject.devproject.application.entities.User;
+import com.myproject.devproject.datasources.mysql.UserRepositoryMysql;
+import com.myproject.devproject.application.usecases.UserUseCase;
 import lombok.SneakyThrows;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,10 +25,10 @@ import static org.mockito.Mockito.when;
 public class UserUseCaseTest {
 
     @InjectMocks
-    UserService userService;
+    UserUseCase userService;
 
     @Mock
-    UserRepository userRepository;
+    UserRepositoryMysql userRepository;
 
     @Test
     public void whenSavedUser_shouldReturnSavedUser() {

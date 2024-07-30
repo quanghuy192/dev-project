@@ -3,9 +3,9 @@ package com.myproject.devproject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.myproject.devproject.models.User;
-import com.myproject.devproject.repositories.MovieRepository;
-import com.myproject.devproject.repositories.UserRepository;
+import com.myproject.devproject.application.entities.User;
+import com.myproject.devproject.datasources.mysql.MovieRepositoryMysql;
+import com.myproject.devproject.datasources.mysql.UserRepositoryMysql;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +15,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -36,9 +34,9 @@ class DevProjectApplicationTests {
     @Autowired
     private MockMvc mvc;
     @Autowired
-    private UserRepository userRepository;
+    private UserRepositoryMysql userRepository;
     @Autowired
-    private MovieRepository movieRepository;
+    private MovieRepositoryMysql movieRepository;
 
     @Test
     void contextLoads() {

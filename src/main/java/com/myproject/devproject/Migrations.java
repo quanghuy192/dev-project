@@ -1,10 +1,10 @@
 package com.myproject.devproject;
 
 import com.github.javafaker.Faker;
-import com.myproject.devproject.models.Movie;
-import com.myproject.devproject.models.User;
-import com.myproject.devproject.repositories.MovieRepository;
-import com.myproject.devproject.repositories.UserRepository;
+import com.myproject.devproject.application.entities.Movie;
+import com.myproject.devproject.application.entities.User;
+import com.myproject.devproject.datasources.mysql.MovieRepositoryMysql;
+import com.myproject.devproject.datasources.mysql.UserRepositoryMysql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -17,10 +17,10 @@ import java.util.Locale;
 public class Migrations implements CommandLineRunner {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepositoryMysql userRepository;
 
     @Autowired
-    private MovieRepository movieRepository;
+    private MovieRepositoryMysql movieRepository;
 
     private final Faker usFaker = new Faker(new Locale("en-US"));
 

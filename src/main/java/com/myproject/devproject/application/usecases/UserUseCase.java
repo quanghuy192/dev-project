@@ -1,7 +1,7 @@
-package com.myproject.devproject.services;
+package com.myproject.devproject.application.usecases;
 
-import com.myproject.devproject.models.User;
-import com.myproject.devproject.repositories.UserRepository;
+import com.myproject.devproject.application.entities.User;
+import com.myproject.devproject.datasources.mysql.UserRepositoryMysql;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,10 +10,10 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserUseCase {
 
     @Autowired
-    UserRepository userRepository;
+    UserRepositoryMysql userRepository;
 
     @SneakyThrows
     public User findBy(String username){

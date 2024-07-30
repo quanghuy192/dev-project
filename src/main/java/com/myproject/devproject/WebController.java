@@ -1,10 +1,10 @@
 package com.myproject.devproject;
 
-import com.myproject.devproject.models.Movie;
-import com.myproject.devproject.models.Notification;
-import com.myproject.devproject.models.User;
-import com.myproject.devproject.services.MovieService;
-import com.myproject.devproject.services.UserService;
+import com.myproject.devproject.application.entities.Movie;
+import com.myproject.devproject.application.models.Notification;
+import com.myproject.devproject.application.entities.User;
+import com.myproject.devproject.application.usecases.MovieUseCase;
+import com.myproject.devproject.application.usecases.UserUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +25,9 @@ public class WebController {
 
     private final ConcurrentHashMap<String, Object> cacheMap = new ConcurrentHashMap<>();
     @Autowired
-    UserService userService;
+    UserUseCase userService;
     @Autowired
-    MovieService movieService;
+    MovieUseCase movieService;
     @Autowired
     SimpMessagingTemplate simpMessagingTemplate;
 

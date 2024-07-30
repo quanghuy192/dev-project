@@ -1,4 +1,4 @@
-package com.myproject.devproject.models;
+package com.myproject.devproject.application.models;
 
 import lombok.Data;
 
