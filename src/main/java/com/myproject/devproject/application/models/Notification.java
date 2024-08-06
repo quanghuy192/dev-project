@@ -1,9 +1,0 @@
-package com.myproject.devproject.application.models;
-
-import lombok.Data;
-
-@Data
-public class Notification {
-    private String text;
-    private String user;
-}

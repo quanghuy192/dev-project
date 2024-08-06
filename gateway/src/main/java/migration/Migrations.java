@@ -1,4 +1,4 @@
-package com.myproject.devproject;
+package gateway;
 
 import com.github.javafaker.Faker;
 import com.myproject.devproject.application.entities.Movie;

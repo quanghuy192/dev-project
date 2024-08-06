@@ -1,4 +1,4 @@
-package com.myproject.devproject;
+package gateway;
 
 import com.myproject.devproject.application.entities.Movie;
 import com.myproject.devproject.application.models.Notification;

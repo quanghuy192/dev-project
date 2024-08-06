@@ -1,4 +1,4 @@
-package com.myproject.devproject.application.usecases;
+package usecases;
 
 import com.myproject.devproject.application.entities.Movie;
 import com.myproject.devproject.datasources.mysql.MovieRepositoryMysql;
