@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+<script  th:inline="javascript">
+    let stompClient = null;
+
+    const socket = new SockJS('/ws');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function(frame) {
+        console.log(frame);
+        stompClient.subscribe('/all/messages', function(result) {
+            show(JSON.parse(result.body));
+        });
+    });
+
+    function show(message) {
+        const mess = 'User: ' + message.user + ' has just shared a new video: ' + message.text
+        alert(mess);
+    }
+</script>
+<body>
+<div>
+    <form th:action="@{/shared}" method="post" style="display: inline">
+        <img src="../static/images/home.png" width="80" th:src="@{images/home.png}" style="object-fit: contain"/>
+        <b style="font-size: xxx-large; margin-right: 70px">Funny Movies</b>
+        Welcome <label style="margin-left: 10px" th:text="*{user.username}"/>
+        <input style="margin-left: 15px" type="submit" value="Shared a movie"/>
+        <button style="margin-left: 19px">Logout</button>
+    </form>
+</div>
+<br>
+<hr>
+<br>
+<ul style="margin-left: 150px; list-style-type: none;">
+    <li th:each="movie : ${movies}">
+        <div style="display: inline">
+            <div style="float: left">
+                <img src="../static/images/icon.png" width="250" th:src="@{images/icon.png}"
+                     style="object-fit: contain; margin-right: 50px"/>
+            </div>
+            <div style="width: 550px; margin-left: 100px">
+                <p style="color: red; font-weight: bold; font-size: larger"><span th:text="*{movie.title}"></span></p>
+                <p> Shared by: <span th:text="*{movie.sharedBy}"></span></p>
+                <p> Description: </p>
+                <p style="font-weight: bold; font-size: small"><span th:text="*{movie.content}"></span></p>
+                <br>
+                <br>
+            </div>
+        </div>
+    </li>
+</ul>
+<br>
+</body>
+</html>

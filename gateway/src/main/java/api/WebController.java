@@ -1,10 +1,5 @@
-package gateway;
+package api;
 
-import com.myproject.devproject.application.entities.Movie;
-import com.myproject.devproject.application.models.Notification;
-import com.myproject.devproject.application.entities.User;
-import com.myproject.devproject.application.usecases.MovieUseCase;
-import com.myproject.devproject.application.usecases.UserUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
