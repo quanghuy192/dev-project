@@ -1,8 +1,10 @@
 package models;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Notification {
     private String text;
     private String username;

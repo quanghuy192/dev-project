@@ -1,13 +1,13 @@
 package gateway;
 
 import com.github.javafaker.Faker;
-import com.myproject.devproject.application.entities.Movie;
-import com.myproject.devproject.application.entities.User;
-import com.myproject.devproject.datasources.mysql.MovieRepositoryMysql;
-import com.myproject.devproject.datasources.mysql.UserRepositoryMysql;
+import entities.Movie;
+import entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import repositories.IMovieRepository;
+import repositories.IUserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +17,10 @@ import java.util.Locale;
 public class Migrations implements CommandLineRunner {
 
     @Autowired
-    private UserRepositoryMysql userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
-    private MovieRepositoryMysql movieRepository;
+    private IMovieRepository movieRepository;
 
     private final Faker usFaker = new Faker(new Locale("en-US"));
 
@@ -54,7 +54,7 @@ public class Migrations implements CommandLineRunner {
 
         users.add(user1);
         users.add(user2);
-        userRepository.saveAll(users);
+        userRepository.storeAll(users);
     }
 
     private void loadMoviesData() {
@@ -69,6 +69,6 @@ public class Migrations implements CommandLineRunner {
             movie.setSharedBy(usFaker.name().fullName());
             movies.add(movie);
         }
-        movieRepository.saveAll(movies);
+        movieRepository.storeAll(movies);
     }
 }

@@ -1,10 +1,10 @@
 package usecases;
 
-import com.myproject.devproject.application.entities.Movie;
-import com.myproject.devproject.datasources.mysql.MovieRepositoryMysql;
+import entities.Movie;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import repositories.IMovieRepository;
 
 import java.util.List;
 
@@ -12,18 +12,18 @@ import java.util.List;
 public class MovieUseCase {
 
     @Autowired
-    MovieRepositoryMysql movieRepository;
+    IMovieRepository movieRepository;
 
     public List<Movie> findAll() {
-        return movieRepository.findAll();
+        return movieRepository.getAll();
     }
 
-    public Movie resolveMovie(Movie movie) {
-        return movieRepository.save(movie);
+    public Movie storeMovie(Movie movie) {
+        return movieRepository.store(movie);
     }
 
     @SneakyThrows
     public Movie findBy(String title){
-        return movieRepository.findMovieByTitle(title);
+        return movieRepository.findByTitle(title);
     }
 }

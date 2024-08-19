@@ -1,5 +1,8 @@
 package api;
 
+import entities.Movie;
+import entities.User;
+import models.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import usecases.MovieUseCase;
+import usecases.UserUseCase;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -19,9 +25,9 @@ public class WebController {
 
     private final ConcurrentHashMap<String, Object> cacheMap = new ConcurrentHashMap<>();
     @Autowired
-    UserUseCase userService;
+    UserUseCase           userService;
     @Autowired
-    MovieUseCase movieService;
+    MovieUseCase          movieService;
     @Autowired
     SimpMessagingTemplate simpMessagingTemplate;
 
@@ -61,7 +67,7 @@ public class WebController {
             return "register";
         }
 
-        userService.resolveUser(user);
+        userService.storeUser(user);
         cacheMap.putIfAbsent("user", user);
         return "register";
     }
