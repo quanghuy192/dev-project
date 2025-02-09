@@ -2,7 +2,7 @@ version: '2.2'
 
 services:
   mysql:
-    platform: linux/x86_64
+#    platform: linux/x86_64
     container_name: mydb-mysql
     image: mysql:5.7
     command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
@@ -13,3 +13,30 @@ services:
       MYSQL_ROOT_PASSWORD: 123456
     ports:
       - 3456:3306
+
+  redis:
+    image: 'redis:latest'
+    ports:
+      - "6379:6379"
+
+  zookeeper:
+      image: confluentinc/cp-zookeeper:7.4.4
+      environment:
+        ZOOKEEPER_CLIENT_PORT: 2181
+        ZOOKEEPER_TICK_TIME: 2000
+      ports:
+        - 22181:2181
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.4
+    depends_on:
+      - zookeeper
+    ports:
+      - 19092:19092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:19092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1

@@ -2,9 +2,9 @@ package core;
 
 import java.util.List;
 
-public interface IRepository<ID extends Long, E extends BaseEntity> {
+public interface IRepository<E extends BaseEntity> {
 
-    E findOne(ID id);
+    E findOne(Long id);
 
     List<E> getAll();
 }

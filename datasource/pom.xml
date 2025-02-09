@@ -8,26 +8,31 @@
         <groupId>com.myproject</groupId>
         <artifactId>dev-project</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/>
+        <relativePath>..</relativePath>
     </parent>
 
     <groupId>com.myproject</groupId>
-    <version>${parent.version}</version>
     <artifactId>datasource</artifactId>
     <packaging>jar</packaging>
 
     <properties>
-        <maven.compiler.source>22</maven.compiler.source>
-        <maven.compiler.target>22</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>com.myproject</groupId>
             <artifactId>application</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.myproject</groupId>
+            <artifactId>core</artifactId>
+            <version>${project.parent.version}</version>
+            <type>jar</type>
         </dependency>
 
         <dependency>
@@ -77,6 +82,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>

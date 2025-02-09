@@ -26,7 +26,6 @@
 
     <properties>
         <lombok.version>1.18.30</lombok.version>
-        <hibernate.version>5.6.10.Final</hibernate.version>
         <springboot.version>6.1.11</springboot.version>
         <springbean.version>6.0.13</springbean.version>
     </properties>
@@ -37,7 +36,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>3.1.5</version>
-                <type>jar</type>
+                <type>pom</type>
                 <scope>import</scope>
             </dependency>
 
@@ -67,7 +66,7 @@
                 <artifactId>spring-boot-starter-jdbc</artifactId>
                 <version>3.1.5</version>
                 <scope>import</scope>
-                <type>jar</type>
+                <type>pom</type>
             </dependency>
 
             <dependency>
@@ -75,7 +74,7 @@
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>3.1.5</version>
                 <scope>import</scope>
-                <type>jar</type>
+                <type>pom</type>
             </dependency>
 
             <dependency>
@@ -86,29 +85,46 @@
             </dependency>
 
             <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>1.5.5.Final</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.myproject</groupId>
                 <artifactId>core</artifactId>
-                <version>${parent.version}</version>
+                <version>${project.parent.version}</version>
+                <type>jar</type>
             </dependency>
             <dependency>
                 <groupId>com.myproject</groupId>
                 <artifactId>application</artifactId>
-                <version>${parent.version}</version>
+                <version>${project.parent.version}</version>
+                <type>jar</type>
             </dependency>
             <dependency>
                 <groupId>com.myproject</groupId>
                 <artifactId>migration</artifactId>
-                <version>${parent.version}</version>
+                <version>${project.parent.version}</version>
+                <type>jar</type>
             </dependency>
             <dependency>
                 <groupId>com.myproject</groupId>
                 <artifactId>datasource</artifactId>
-                <version>${parent.version}</version>
+                <version>${project.parent.version}</version>
+                <type>jar</type>
             </dependency>
             <dependency>
                 <groupId>com.myproject</groupId>
                 <artifactId>gateway</artifactId>
-                <version>${parent.version}</version>
+                <version>${project.parent.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>3.26.3</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

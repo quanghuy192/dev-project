@@ -34,7 +34,7 @@ III) Installation & Configuration:  <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    spring.datasource.url=jdbc:mysql://localhost:{your_port}/{your_database}?useSSL=false <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    spring.datasource.username={your_username} <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    spring.datasource.password={your_password} <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    7. Run project (Main in DevProjectApplication.java) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    7. Run project (Main in migration.DevProjectApplication.java) <br>
 
 IV) Database Setup:  <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    1. We do not need seeding fake data, the seed data will be appended new 10 for users and 20 for movies when we run the application,
@@ -45,7 +45,7 @@ we just ensure above step must success (run docker-compose success, the database
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Otherwise, connect DB to see more <br>
 
 V) Running the Application:  <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    1. Using Spring Boots with thymeleaf so we just only run Main in DevProjectApplication.java, then we can access the web browser: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    1. Using Spring Boots with thymeleaf so we just only run Main in migration.DevProjectApplication.java, then we can access the web browser: <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    http://localhost:8080/ <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    2. We only create 3 template: <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    -  http://localhost:8080/index : The first page when user need to register or login <br>

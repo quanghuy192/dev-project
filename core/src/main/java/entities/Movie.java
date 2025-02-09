@@ -1,9 +1,7 @@
 package entities;
 
 import core.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,14 +9,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "movies")
-@Data
+@Getter
+@Setter
+@Builder(access = AccessLevel.PUBLIC)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Movie extends BaseEntity implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = -297553281792804393L;
 
     @Id

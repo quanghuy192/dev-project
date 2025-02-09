@@ -1,4 +1,4 @@
-package com.myproject.devproject.datasources.redis;
+package redis;
 
 public class UserRepositoryRedis {
 }
